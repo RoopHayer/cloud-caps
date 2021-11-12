@@ -22,10 +22,12 @@ const payload ={
 
 };
 
-sns.publish(payload).promise() 
+setInterval(()=>{
+  sns.publish(payload).promise().then()
   .catch(e => {
     console.log(e);
-  });
+  })
+},5000)
 
   const server = Consumer.create({
     queueUrl: 'https://sqs.us-east-2.amazonaws.com/145980369516/flowers',

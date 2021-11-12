@@ -8,7 +8,7 @@ const queueUrl = 'https://sqs.us-east-2.amazonaws.com/145980369516/packages.fifo
 
 const consumer = Consumer.create({
   queueUrl: queueUrl,
-  handleMessage : message=>{
+  handleMessage : async (message)=>{
     const msg = JSON.parse(message.Body);
     const order = JSON.parse(msg.Message);
     console.log('Picked-up ', order);
@@ -24,9 +24,8 @@ const consumer = Consumer.create({
       body: JSON.stringify(order)
     })
     console.log(`${order.orderId} delivered!`)
-  })
+  },5000)
   }
-
 
 })
 consumer.start();
